@@ -1,0 +1,49 @@
+<% if user_signed_in? %>
+  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'ログイン', new_user_session_path %>
+  <%= link_to '新規登録', new_user_registration_path %>
+<% end %>
+
+
+<h1>料理の一覧表</h1>
+
+<% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>料理名</th>
+            <th>料理の作る際のポイント</th>
+            <th>材料</th>
+            <th>作り方</th>
+            <th>詳細</th>
+            <th>編集</th>
+            <th>削除</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @cooks.each do |cook| %>
+            <tr>
+                <td><%= cook.id %></td>
+                <td><%= cook.name %></td>
+                <td><%= cook.poin %></td>
+                <td><%= cook.ingredient %></td>
+                <td><%= cook.recipe %></td>
+                <td><%= link_to "詳細", cook %></td>
+                <td><%= link_to "編集" , [:edit, cook] %></td>
+                <td>
+                    <%= link_to "削除", cook, method: :delete, data:{confirm:"本当に削除しますか？"} %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<p><%= link_to "料理の新規登録", new_cook_path %></p>
+<p><%= link_to "投稿一覧表", posts_path %></p>
+
+

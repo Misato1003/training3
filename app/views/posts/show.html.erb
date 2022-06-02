@@ -1,0 +1,47 @@
+<h3>投稿詳細</h3>
+
+<table>
+    <tr>
+        <th>投稿内容</th>
+        <td><pre><%= @post.content %></pre></td>
+    </tr>
+    <tr>
+        <th>更新日時</th>
+        <td><%= @post.updated_at.to_s(:datetime_jp) %></td>
+    </tr>
+    <tr>
+        <th>投稿日時</th>
+        <td><%= @post.created_at.to_s(:datetime_jp) %></td>
+    </tr>
+    <tr>
+        <th>投稿者</th>
+        <td><%= @post.cook_id %></td>
+    </tr>
+</table>
+
+<h3>料理の詳細</h3>
+
+<table>
+    <tr>
+        <th>料理名</th>
+        <td><%= @post.cook.name %></td>
+    </tr>
+    <tr>
+        <th>作る際のポイント</th>
+        <td><%= @post.cook.poin %></td>
+    </tr>
+    <tr>
+        <th>材料</th>
+        <td><%= @post.cook.ingredient %></td>
+    </tr>
+    <tr>
+        <th>作り方</th>
+        <td><%= @post.cook.recipe %></td>
+    </tr>
+</table>
+
+<div>
+    <ul>
+        <li><%= link_to "料理の一覧表" , cooks_path %></li>
+    </ul>
+</div>
