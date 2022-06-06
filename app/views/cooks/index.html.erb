@@ -23,6 +23,7 @@
             <th>詳細</th>
             <th>編集</th>
             <th>削除</th>
+            <th>お気に入り</th>
         </tr>
     </thead>
     <tbody>
@@ -38,6 +39,15 @@
                 <td>
                     <%= link_to "削除", cook, method: :delete, data:{confirm:"本当に削除しますか？"} %>
                 </td>
+                <td>
+                    <% if user_signed_in? && current_user != cook.users %>
+                        <% if current_user.favorite_find(cook.id) %>
+                          <%= link_to 'お気に入りからはずす', destroy_favorite_path(cook.id), method: :delete %>
+                        <% else %>
+                          <%= link_to 'お気に入り登録する', create_favorite_path(cook.id), method: :post %>
+                        <% end %>
+                    <% end %>
+                </td>
             </tr>
         <% end %>
     </tbody>
@@ -45,5 +55,4 @@
 
 <p><%= link_to "料理の新規登録", new_cook_path %></p>
 <p><%= link_to "投稿一覧表", posts_path %></p>
-
 
