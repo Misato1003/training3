@@ -1,5 +1,7 @@
 <% if user_signed_in? %>
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+  <%= link_to 'お気に入り一覧', user_path(current_user.id) %>
+  <%= link_to '料理の投稿ページ', new_cook_path %>
 <% else %>
   <%= link_to 'ログイン', new_user_session_path %>
   <%= link_to '新規登録', new_user_registration_path %>
@@ -28,27 +30,27 @@
     </thead>
     <tbody>
         <% @cooks.each do |cook| %>
-            <tr>
-                <td><%= cook.id %></td>
-                <td><%= cook.name %></td>
-                <td><%= cook.poin %></td>
-                <td><%= cook.ingredient %></td>
-                <td><%= cook.recipe %></td>
-                <td><%= link_to "詳細", cook %></td>
-                <td><%= link_to "編集" , [:edit, cook] %></td>
-                <td>
-                    <%= link_to "削除", cook, method: :delete, data:{confirm:"本当に削除しますか？"} %>
-                </td>
-                <td>
-                    <% if user_signed_in? && current_user != cook.users %>
-                        <% if current_user.favorite_find(cook.id) %>
-                          <%= link_to 'お気に入りからはずす', destroy_favorite_path(cook.id), method: :delete %>
-                        <% else %>
-                          <%= link_to 'お気に入り登録する', create_favorite_path(cook.id), method: :post %>
+                <tr>
+                    <td><%= cook.id %></td>
+                    <td><%= cook.name %></td>
+                    <td><%= cook.poin %></td>
+                    <td><%= cook.ingredient %></td>
+                    <td><%= cook.recipe %></td>
+                    <td><%= link_to "詳細", cook %></td>
+                    <td><%= link_to "編集" , [:edit, cook] %></td>
+                    <td>
+                        <%= link_to "削除", cook, method: :delete, data:{confirm:"本当に削除しますか？"} %>
+                    </td>
+                    <td>
+                        <% if user_signed_in? && current_user != cook.users %>
+                            <% if current_user.favorite_find(cook.id) %>
+                              <%= link_to 'お気に入りからはずす', destroy_favorite_path(cook.id), method: :delete %>
+                            <% else %>
+                              <%= link_to 'お気に入り登録する', create_favorite_path(cook.id), method: :post %>
+                            <% end %>
                         <% end %>
-                    <% end %>
-                </td>
-            </tr>
+                    </td>
+                </tr>
         <% end %>
     </tbody>
 </table>

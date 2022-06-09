@@ -1,0 +1,9 @@
+<% @user_favorites.reverse_each do |favorite| %>
+  <div>
+    <%= favorite.cook.name %>
+  </div>
+<% end %>
+<% if @user_favorites.empty? %>
+  <h2>お気に入りはありません</h2>
+<% end %>
+<%= link_to 'トップページに戻る', root_path %>

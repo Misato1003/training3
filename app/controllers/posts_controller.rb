@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: :index
   def index
     @posts = Post.all
   end
@@ -7,7 +8,7 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new(params.require(:post).permit(:content, :cook_id).merge(user_id: current_user.id))
+    @post = Post.new(params.require(:post).permit(:content, :cook_id, :user_id).merge(user_id: current_user.id))
     if @post.save
       flash[:notice] = "新規投稿しました"
       redirect_to :posts
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
-    if @post.update(params.require(:post).permit(:content, :cook_id))
+    if @post.update(params.require(:post).permit(:content, :cook_id, :user_id))
       flash[:notice] = "投稿を更新しました"
       redirect_to :posts
     else

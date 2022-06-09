@@ -36,6 +36,7 @@
         </tr>
       </table>
       <%= f.hidden_field :cook_id, value: @cook.id %>
+      <%= f.hidden_field :user_id, value: @user_id %>
       <div>
         <ul>
           <li><%= f.submit "投稿を完了する"%></li>
@@ -62,7 +63,7 @@
                 <td><%= post.content %></td>
                 <td><%= post.updated_at.to_s(:datetime_jp) %></td>
                 <td><%= post.created_at.to_s(:datetime_jp) %></td>
-                <td><%= post.cook_id %></td>
+                <td><%= post.user_id %></td>
             </tr>
         <% end %>
     </tbody>
